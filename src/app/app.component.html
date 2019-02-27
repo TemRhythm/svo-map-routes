@@ -1,20 +1,25 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
+<svg width="445.72174" height="546.74475" viewBox="0 0 445.72174 546.74475" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path class="walk-zone" stroke="black" fill="none" stroke-width="1" d="m 195.72174,0.366025 100.8065,174.601985 -0.36602,1.36602 -62.85959,36.292 47.387,82.0767 62.85959,-36.292 1.36602,0.36602 100.8065,174.60198 -0.36602,1.36603 -193.9897,112 L 250,546.37873 149.1935,371.77675 l 0.36602,-1.36602 64.99348,-37.524 -47.387,-82.0767 -64.99348,37.524 -1.36602,-0.36602 L 0,113.36603 0.36602,112 194.35572,0 Z"></path>
+  <g *ngIf="grid">
+    <path [attr.d]="rect.points | svgPath"
+          *ngFor="let rect of grid.rects"
+          [attr.fill]="rect.isAllowedToWalk ? 'none' : 'grey'"
+          stroke="black"></path>
+    <circle [attr.cx]="point.x"
+            [attr.cy]="point.y"
+            r="2"
+            *ngFor="let point of zone.points; let i = index;"></circle>
+    <text [attr.x]="point.x"
+          [attr.y]="point.y"
+          *ngFor="let point of zone.points; let i = index;">{{i}}</text>
+  </g>
+  <path class="route"
+        fill="none"
+        stroke="red"
+        stroke-width="2"
+        *ngIf="!!randomPoints"
+        [attr.d]="randomPoints | svgPath: {isClosed: false}"></path>
+  <circle [attr.cx]="routePoints[0].x" [attr.cy]="routePoints[0].y" r="2" fill="red"></circle>
+  <circle [attr.cx]="routePoints[1].x" [attr.cy]="routePoints[1].y" r="2" fill="green"></circle>
+</svg><br>
+<button (click)="generatePoints()">Generate Path</button>
